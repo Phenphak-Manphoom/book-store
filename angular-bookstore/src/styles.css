@@ -25,6 +25,11 @@ body{
   float: left;
 }
 
+.list-group-item{
+  color: dodgerblue;
+  font-size: 18px;
+}
+
 
 
 
