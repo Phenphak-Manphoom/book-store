@@ -1,197 +1,30 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-@font-face{
-  font-family:'Roboto Mono';
+@font-face {
+  font-family: "Roboto Mono";
   src: url(./assets/fonts/Roboto_Mono/Roboto-Regular.ttf) format("truetype");
 }
-h1{
-  font-family:'Roboto Mono' ;
+h1 {
+  font-family: "Roboto Mono";
 }
-body{
+body {
   padding-top: 56px;
 }
 .bg-dark {
   background-color: #343a40 !important;
 }
-.ml-auto,
-.mx-auto {
+.ml-auto {
   margin-left: auto !important;
 }
-.btn-primary{
+.card-footer .btn-primary {
   float: right;
 }
-.py-5{
+.py-5 {
   float: left;
 }
 
-.list-group-item{
+.list-group-item {
   color: dodgerblue;
   font-size: 18px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

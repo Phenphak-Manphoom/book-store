@@ -13,4 +13,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
  @RestResource(path = "categoryid")	
  Page<Book> findByCategoryId(@Param("id")Long id,Pageable pageable); //search by category มันจะสร้าง default path "search มาให้อัตโนมัติ"
 
+ @RestResource(path = "searchbykeyword")	
+ Page<Book> findByNameContaining(@Param("name")String keyword,Pageable pageable);
 }

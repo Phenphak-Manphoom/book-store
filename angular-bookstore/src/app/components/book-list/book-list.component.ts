@@ -12,6 +12,7 @@ import { BookService } from 'src/app/services/book.service';
 export class BookListComponent implements OnInit {
   books: Book[];
   currentCategoryId: number;
+  searchMode :boolean;
 
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute) { }
 
@@ -23,6 +24,17 @@ export class BookListComponent implements OnInit {
   }
 
   listBooks() {
+  this.searchMode = this.activatedRoute.snapshot.paramMap.has('keyword');
+  if (this.searchMode) {
+    //do search work
+    this.handleSearchBooks();
+  }else{
+    //display book base on category
+    this.handleListBooks();
+  }
+  }
+
+  handleListBooks(){
     const hasCategoryId: boolean = this.activatedRoute.snapshot.paramMap.has('id');
     if (hasCategoryId) {
       this.currentCategoryId = +this.activatedRoute.snapshot.paramMap.get('id');
@@ -33,6 +45,13 @@ export class BookListComponent implements OnInit {
     this.bookService.getBooks(this.currentCategoryId).subscribe(
       data => this.books = data
     )
+  }
+  handleSearchBooks(){
+   const keyword :string = this.activatedRoute.snapshot.paramMap.get('keyword');
+
+   this.bookService.searchBooks(keyword).subscribe(
+     data=> this.books=data
+   )
   }
 
 }
