@@ -1,10 +1,5 @@
-<div class="col-md-12">
-  <div class="row">
-    <div class="col-md-10">
-      <input type="text" #searchinput (keyup.enter)="searchBooks(searchinput.value)" class="form-control" placeholder="Search Books">
-    </div>
-    <div class="col-md-2">
-      <button type="submit" (click)="searchBooks(searchinput.value)" class="btn btn-primary">Search</button>
-    </div>
-  </div>
+<div class="navbar-nav ml-2">
+  <input type="text" #searchinput (keyup.enter)="searchBooks(searchinput.value)" class="form-control"
+    placeholder="Search Books">
+  <button type="submit" (click)="searchBooks(searchinput.value)" class="btn btn-primary " style="margin-left: 5px;">Search</button>
 </div>

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/common/book';
 import { BookService } from 'src/app/services/book.service';
-import {NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItem } from 'src/app/common/cart-item';
+
 
 
 @Component({
@@ -15,7 +18,7 @@ export class BookListComponent implements OnInit {
   books: Book[] = [];
   currentCategoryId: number;
   searchMode: boolean = false;
-  previousCategory:number=1;
+  previousCategory: number = 1;
 
   //new properties for server side paging
   currentPage: number = 1;
@@ -25,9 +28,13 @@ export class BookListComponent implements OnInit {
 
 
 
-  constructor(private bookService: BookService, private activatedRoute: ActivatedRoute, config :NgbPaginationConfig) {
-    config.maxSize=3; //config paginate
-    config.boundaryLinks=true;
+  constructor(private bookService: BookService,
+    private cartService :CartService,
+    private activatedRoute: ActivatedRoute,
+
+     config: NgbPaginationConfig) {
+    config.maxSize = 3; //config paginate
+    config.boundaryLinks = true;
 
   }
 
@@ -41,6 +48,8 @@ export class BookListComponent implements OnInit {
 
 
   listBooks() {
+    // //start the loader/spinner
+    // this.spinnerService.show();
     this.searchMode = this.activatedRoute.snapshot.paramMap.has('keyword');
     if (this.searchMode) {
       //do search work
@@ -61,9 +70,9 @@ export class BookListComponent implements OnInit {
     //setting up the current page to 1
     //if user navigates to other category
     if (this.previousCategory != this.currentCategoryId) {
-      this.currentPage=1;
+      this.currentPage = 1;
     }
-    this.previousCategory=this.currentCategoryId
+    this.previousCategory = this.currentCategoryId
 
     this.bookService.getBooks(this.currentCategoryId,
       this.currentPage - 1,
@@ -76,23 +85,33 @@ export class BookListComponent implements OnInit {
     const keyword: string = this.activatedRoute.snapshot.paramMap.get('keyword');
 
     this.bookService.searchBooks(keyword,
-                                 this.currentPage -1,
-                                 this.pageSize)
-                                 .subscribe(this.processPaginate())
+      this.currentPage - 1,
+      this.pageSize)
+      .subscribe(this.processPaginate())
 
   }
   updatePageSize(pageSize: number) {
-    this.pageSize=pageSize;
-    this.currentPage=1;
+    this.pageSize = pageSize;
+    this.currentPage = 1;
     this.listBooks();
   }
 
-  processPaginate(){
+  processPaginate() {
     return data => {
+
+      //stop the spinner/loader
+      // this.spinnerService.hide();
       this.books = data._embedded.books;
       this.currentPage = data.page.number + 1;
       this.totalRecords = data.page.totalElements;
       this.pageSize = data.page.size;
+
     }
+  }
+
+  addToCart(book: Book){
+    console.log(`book name: ${book.name}, and price: ${book.unitPrice}`);
+    const cartItem = new CartItem(book);
+    this.cartService.addToCart(cartItem);
   }
 }

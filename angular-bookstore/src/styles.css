@@ -14,9 +14,7 @@ body {
 .bg-dark {
   background-color: #343a40 !important;
 }
-.ml-auto {
-  margin-left: auto !important;
-}
+
 .card-footer .btn-primary {
   float: right;
 }
@@ -30,6 +28,10 @@ body {
 }
 a{
   cursor: pointer;
+}
+
+app-cart-status{
+  margin-left: auto;
 }
 
 
