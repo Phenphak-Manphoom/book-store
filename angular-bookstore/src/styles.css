@@ -34,4 +34,8 @@ app-cart-status{
   margin-left: auto;
 }
 
+a, .pointer{
+  cursor: pointer;
+}
+
 
